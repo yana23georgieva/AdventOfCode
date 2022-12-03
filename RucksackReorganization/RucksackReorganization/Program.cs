@@ -11,7 +11,28 @@ namespace RucksackReorganization
             string[] lines = File.ReadAllLines("Input.txt");
             int sum = 0;
 
-            foreach (var item in lines)
+            //Part2
+            for (int i = 0; i < lines.Length; i += 3)
+            {
+                char[] first = lines[i].ToCharArray();
+                char[] second = lines[i + 1].ToCharArray();
+                char[] third = lines[i + 2].ToCharArray();
+
+                char[] diff = first.Intersect(second).ToArray();
+                char[] finalDiff = diff.Intersect(third).ToArray();
+
+                if (char.IsUpper(finalDiff[0]))
+                {
+                    sum += (finalDiff[0] - 38);
+                }
+                else
+                {
+                    sum += (finalDiff[0] - 96);
+                }
+            }
+
+            //Part 1
+            /*foreach (var item in lines)
             {
                 char[] items = item.ToCharArray();
                 char[] firstPart = items.Take(items.Length / 2).ToArray();
@@ -26,7 +47,7 @@ namespace RucksackReorganization
                 {
                     sum += (diff[0] - 96);
                 }
-            }
+            }*/
 
             Console.WriteLine(sum);
         }
